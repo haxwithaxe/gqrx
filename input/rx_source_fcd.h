@@ -20,8 +20,8 @@
 #ifndef RX_SOURCE_FCD_H
 #define RX_SOURCE_FCD_H
 
-#include <gr_hier_block2.h>
-#include <gr_float_to_complex.h>
+#include <gr::hier_block2.h>
+#include <gr::blocks::float_to_complex.h>
 #include "input/rx_source_base.h"
 #include "pulseaudio/pa_source.h"
 
@@ -75,7 +75,7 @@ public:
 
 private:
     pa_source_sptr           d_audio_src;     /*! Pulseaudio source. */
-    gr_float_to_complex_sptr d_f2c;           /*! Block to MUX audio L/R into complex I/Q. */
+    gr::blocks::float_to_complex::sptr d_f2c;           /*! Block to MUX audio L/R into complex I/Q. */
     std::vector<double>      d_sample_rates;  /*! Supported sample rates. */
     double                   d_freq;          /*! Current RF frequency. */
     int                      d_freq_corr;     /*! Current frequency correction in ppm. */

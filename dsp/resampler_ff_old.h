@@ -20,8 +20,8 @@
 #ifndef RESAMPLER_FF_H
 #define RESAMPELR_FF_H
 
-#include <gr_hier_block2.h>
-#include <gr_rational_resampler_base_fff.h>
+#include <gr::hier_block2.h>
+#include <gr::filter::rational_resampler_base_fff.h>
 
 
 class resampler_ffo;
@@ -46,7 +46,7 @@ resampler_ffo_sptr make_resampler_ffo(unsigned int input_rate, unsigned int outp
  * of generating filter taps that can be used for the resampler, as well as calculating
  * the interpolation and decimation given the input/output sample rates.
  */
-class resampler_ffo : public gr_hier_block2
+class resampler_ffo : public gr::hier_block2
 {
 
 public:
@@ -55,7 +55,7 @@ public:
 
 private:
     std::vector<float> d_taps;
-    gr_rational_resampler_base_fff_sptr  d_rrb;
+    gr::filter::rational_resampler_base_fff::sptr  d_rrb;
 
     unsigned int d_interp;
     unsigned int d_decim;

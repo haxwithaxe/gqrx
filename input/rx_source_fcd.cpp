@@ -38,7 +38,7 @@ rx_source_fcd::rx_source_fcd(const std::string device_name)
     d_audio_src = make_pa_source(device_name, 96000, 2, "GQRX", "I/Q input");
     /** TODO: check error */
 
-    d_f2c = gr_make_float_to_complex(1);
+    d_f2c = gr::blocks::float_to_complex::make(1);
 
     // populate supported sample rates
     d_sample_rates.push_back(96000.0);

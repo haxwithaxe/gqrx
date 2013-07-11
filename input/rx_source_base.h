@@ -20,7 +20,7 @@
 #ifndef RX_SOURCE_BASE_H
 #define RX_SOURCE_BASE_H
 
-#include <gr_hier_block2.h>
+#include <gr::hier_block2.h>
 
 
 class rx_source_base;
@@ -35,12 +35,12 @@ typedef boost::shared_ptr<rx_source_base> rx_source_base_sptr;
  * should be derived from this class to ensure uniform API.
  *
  */
-class rx_source_base : public gr_hier_block2
+class rx_source_base : public gr::hier_block2
 {
 
 public:
     /*! \brief Public contructor.
-     *  \param src_name Descriptive name used in the contructor of gr_hier_block2
+     *  \param src_name Descriptive name used in the contructor of gr::hier_block2
      */
     rx_source_base(const std::string src_name);
     ~rx_source_base();

@@ -158,7 +158,7 @@ unix {
     } else {
         PKGCONFIG += gnuradio-audio
     }
-    PKGCONFIG += gnuradio-core gnuradio-osmosdr
+    PKGCONFIG += gnuradio-runtime gnuradio-osmosdr
 }
 
 unix:!macx {

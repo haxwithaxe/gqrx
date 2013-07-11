@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 #include <cmath>
-#include <gr_io_signature.h>
-#include <gr_firdes.h>
+#include <gnuradio/io_signature.h>
+#include <gnuradio/filter/firdes.h>
 #include <dsp/resampler_ff.h>
 #include <iostream>
 
@@ -41,9 +41,9 @@ static const int MAX_OUT = 1; /* Maximum number of output streams. */
 
 
 resampler_ffo::resampler_ffo(unsigned int input_rate, unsigned int output_rate)
-    : gr_hier_block2 ("resampler_ffo",
-                      gr_make_io_signature (MIN_IN, MAX_IN, sizeof (float)),
-                      gr_make_io_signature (MIN_OUT, MAX_OUT, sizeof (float)))
+    : gr::hier_block2 ("resampler_ffo",
+                      gr::io_signature::make (MIN_IN, MAX_IN, sizeof (float)),
+                      gr::io_signature::make (MIN_OUT, MAX_OUT, sizeof (float)))
 {
 
     /* calculate interpolation and decimation */
@@ -59,16 +59,16 @@ resampler_ffo::resampler_ffo(unsigned int input_rate, unsigned int output_rate)
     float trans_width = 0.5 - fract_bw;
     float mid_trans_band = 0.5 - trans_width/2.0;
 
-    d_taps = gr_firdes::low_pass(d_interp,   // gain
+    d_taps = gr::filter::firdes::low_pass(d_interp,   // gain
                                  1.0,        // sampling freq
                                  mid_trans_band/d_interp,
                                  trans_width/d_interp,
-                                 gr_firdes::WIN_KAISER,
+                                 gr::filter::firdes::WIN_KAISER,
                                  5.0     // beta
                                 );
 
     /* create band pass filter */
-    d_rrb = gr_make_rational_resampler_base_fff(d_interp, d_decim, d_taps);
+    d_rrb = gr::filter::rational_resampler_base_fff::make(d_interp, d_decim, d_taps);
 
     /* connect filter */
     connect(self(), 0, d_rrb, 0);
